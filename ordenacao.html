@@ -3,20 +3,7 @@
 <head lang="pt-br">
     <meta charset="iso-8859-1">
     <title>ordenação drop</title>
-    <style>
-        *{margin: 0; padding: 0}
-        section{ align-items: center; font-family: Courier New, Courier, monospace}
-        li{ background: #CACACA;border: 2px solid white;border-radius: 6px;    margin: 9px 0;padding: .5em 3em;list-style: none;color: white;cursor:move;  box-shadow: 0 5px 4px rgba(128, 128, 128, 0.29);}
-        li,ul{list-style: none}
-        @keyframes animeDrag {0%{ background:#2cd679;}100%{background-color: #CACACA}}
-        @keyframes animeDrop {0%{  background: rgb(230, 62, 64);}100%{background-color: #CACACA}}
-        li.dragstart{    background: rgb(125, 193, 255); }
-        li.dragmove{animation:animeDrop 1s ease-in 1 }
-        li.dragend{animation:animeDrag 2s ease-in 1}
-        li.dragover{border:2px dashed #fff;opacity: .4;}
-        #dropzone{border: 1px dashed darkgrey;border-radius: 3px;max-width: 300px;padding: 1em;margin: 50px auto;width: calc(100% - 2em);transition: all .3s;        }
-    </style>
-
+    <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
 
@@ -35,63 +22,6 @@
 
     </div>
 </section>
-
-
-
-
-<script>
-
-    var li = document.querySelectorAll('#dropzoneul li');
-    [].forEach.call(li, function(event) {
-
-        //drag start
-        event.addEventListener('dragstart', function(e){
-            this.className='dragstart';
-            //variavel global para guardar o conteudo
-            dragSrl=this;
-            e.dataTransfer.effectAllowed = 'move';
-
-            //transfere o conteudo desse objeto para o dataTransfere.setData();
-            e.dataTransfer.setData('text/html', this.innerHTML)
-
-        }, false);
-
-        //manipulação de objeto de destino
-        event.addEventListener('drop', function(e){
-            e.preventDefault();
-            this.className='dragend';
-            //só troca o conteudo se objeto que está vindo for diferente do objeto atual;
-            if(dragSrl != this){
-                dragSrl.innerHTML = this.innerHTML;
-//                obtem o conteudo do novo objeto atraves do dataTransfer.getData();
-                this.innerHTML = e.dataTransfer.getData('text/html');
-            }
-            e.dataTransfer.dropEffect = 'move';
-            return false;
-        }, false);
-
-
-        //evento assionado ao soltar objeto
-        event.addEventListener('dragend', function(e){
-            e.preventDefault();
-            this.className='dragmove';
-        }, false);
-
-        //evento assionado ao ter um outro objeto passando por cima do atual
-        event.addEventListener('dragover', function(e){
-            e.preventDefault();
-            this.className='dragover';
-        }, false);
-
-        //evento assionado quando outro objeto sai de cima do atual
-        event.addEventListener('dragleave', function(e){
-            e.preventDefault();
-            this.className='';
-            return false;
-        }, false);
-
-    });
-
-</script>
+<script src="js/main.js" async></script>
 </body>
 </html>
